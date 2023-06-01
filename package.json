@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "lint": "eslint src --ext .ts --fix"
+    "lint": "eslint src --ext .ts --fix",
+    "postgres:start": "docker run -d -p $(grep DB_PORT .env | cut -d= -f 2):5432 --name $(grep DB_DATABASE .env | cut -d= -f 2) -e POSTGRES_HOST_AUTH_METHOD=trust postgres:12-alpine",
+    "database:create": "docker exec $(grep DB_DATABASE .env | cut -d= -f 2) psql -U postgres postgres -c \"CREATE DATABASE $(grep DB_DATABASE .env | cut -d= -f 2)\""
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "fastify": "^4.17.0"
+    "fastify": "^4.17.0",
+    "pg": "^8.11.0"
   }
 }
