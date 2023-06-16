@@ -1,6 +1,6 @@
-import { knex as setupKnex } from 'knex'
+import { knex as setupKnex, Knex } from 'knex'
 
-export const knex = setupKnex({
+export const config: Knex.Config = {
   client: 'pg',
   connection: {
     database: 'fastify',
@@ -11,6 +11,8 @@ export const knex = setupKnex({
   },
   migrations: {
     directory: 'src/migrations',
-    extension: 'js',
+    extension: 'ts',
   },
-})
+}
+
+export const knex = setupKnex(config)
