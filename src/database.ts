@@ -1,13 +1,14 @@
 import { knex as setupKnex, Knex } from 'knex'
+import { env } from './env'
 
 export const config: Knex.Config = {
   client: 'pg',
   connection: {
-    database: 'fastify',
-    host: 'localhost',
-    password: 'postgres',
-    port: parseInt(process.env.DB_PORT ?? '5433', 10),
-    user: 'postgres',
+    database: env.DB_DATABASE,
+    host: env.DB_HOST,
+    password: env.DB_PASSWORD,
+    port: parseInt(env.DB_PORT),
+    user: env.DB_USERNAME,
   },
   migrations: {
     directory: 'src/migrations',
